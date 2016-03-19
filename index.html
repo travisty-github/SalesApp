@@ -2,13 +2,21 @@
 <html ng-app>
 
 <head>
-  <title>AngularJS Hello World!</title>
+  <title>Using Directives</title>
 </head>
 
-<body>
-  Name: <input type="text" ng-model="name" />
+<body ng-init="name='Bec'">
+  <div ng-hide="isHidden">
+    Name:
+    <input type="test" ng-model="name" />
+  </div>
+  <div ng-bind="name">
+
+  </div>
+  Hide:
+  <input type="checkbox" ng-model="isHidden" />
   <br />
-  {{ name }}
+  <button ng-click="name='Jane'">Change name</button>
   <script src="angular.js"></script>
 </body>
 
