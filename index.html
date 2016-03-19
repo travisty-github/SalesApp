@@ -1,32 +1,30 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="customersApp">
 
 <head>
   <title>More on Directives</title>
   <link href="style.css" type="text/css" rel="stylesheet" />
 </head>
 
-<body ng-init="customers=[{joined: '2012-10-09', name: 'Travis', city: 'Brisbane', orderTotal: 134.435},
-{joined: '2013-11-02', name: 'John', city: 'Melbourne', orderTotal: 414.437},
-{joined: '2007-10-19', name: 'Jack', city: 'Perth', orderTotal: 99.211}];sortBy='name';rev=false">
+<body data-ng-controller="CustomersController">
 
-<input type="text" ng-model="customerFilter" />
-<table>
+<input type="text" />
+<table >
   <tr>
-    <th ng-click="sortBy='name';rev=!rev">
+    <th ng-click="sortBy('name')">
       Name
     </th>
-    <th ng-click="sortBy='joined';rev=!rev">
+    <th ng-click="sortBy('joined')">
       Joined
     </th>
-    <th ng-click="sortBy='city';rev=!rev">
+    <th ng-click="sortBy('city')">
       City
     </th>
-    <th ng-click="sortBy='orderTotal';rev=!rev">
+    <th ng-click="sortBy('orderTotal')">
       Order Total
     </th>
   </tr>
-  <tr ng-repeat="customer in customers | filter: {name: customerFilter}| orderBy: sortBy:rev">
+  <tr ng-repeat="customer in customers | filter: {name: customerFilter}| orderBy:sort:reverse">
     <td>
       {{ customer.name }}
     </td>
@@ -43,6 +41,8 @@
 </table>
 
   <script src="angular.js"></script>
+  <script src="app/app.js"></script>
+  <script src="app/controllers/customersController.js"></script>
 </body>
 
 </html>
