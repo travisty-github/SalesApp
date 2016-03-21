@@ -15,6 +15,9 @@
     <th ng-click="sort('orderTotal')">
       Order Total
     </th>
+    <th>
+      &nbsp;
+    </th>
   </tr>
   <tr ng-repeat="customer in customers | orderBy : sortBy : reverse | filter : {name: filterText}">
     <td>
@@ -28,6 +31,9 @@
     </td>
     <td>
       {{ customer.orderTotal | currency }}
+    </td>
+    <td>
+      <a href="#/orders/{{ customer.id }}">View Orders</a>
     </td>
   </tr>
 </table>

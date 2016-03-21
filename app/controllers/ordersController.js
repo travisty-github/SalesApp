@@ -1,9 +1,22 @@
 (function() {
-  CustomersController.$inject = ['$scope'];
+  // Inject manually for minification.
+  OrderController.$inject = ['$scope', '$routeParams'];
 
-  function CustomersController($scope, $routeProvider) {
-    $scope.reverse = false;
-    $scope.sortBy = 'name';
+  function OrderController($scope, $routeParams) {
+    var customerId = $routeParams.customerId;
+    $scope.orders = null;
+
+    function init() {
+      var customer = $scope.customers.filter(function(d) {
+        return d.id === parseInt(customerId);
+      });
+
+      if (customer.length !== 1) {
+        throw new Error("Expected 1 match, got " + customer.length + " matches");
+      }
+
+      $scope.orders = customer[0].orders;
+    }
 
     $scope.customers = [{
       id: 1,
@@ -47,8 +60,9 @@
         total: 100
       }]
     }];
+    init();
   }
 
-  angular.module('customersApp').controller('CustomersController', CustomersController);
+  angular.module('customersApp').controller('OrdersController', OrderController);
 
 }());
