@@ -1,6 +1,6 @@
 (function() {
   CustomersController.$inject = ['$scope'];
-  function CustomersController($scope) {
+  function CustomersController($scope, $routeProvider) {
     $scope.reverse = false;
     $scope.sortBy = 'name';
 
