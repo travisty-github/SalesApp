@@ -1,52 +1,25 @@
 (function() {
-  CustomersController.$inject = ['$scope'];
+  CustomersController.$inject = ['$scope', '$route', 'customersFactory'];
 
-  function CustomersController($scope, $routeProvider) {
+  function CustomersController($scope, $route, customersFactory) {
+
     $scope.reverse = false;
     $scope.sortBy = 'name';
+    $scope.customers = [];
 
-    $scope.customers = [{
-      id: 1,
-      joined: '2012-10-09',
-      name: 'Travis',
-      city: 'Brisbane',
-      orderTotal: 134.435,
-      orders: [{
-        id: 1,
-        product: 'Shoes',
-        total: 123.435
-      }]
-    }, {
-      id: 2,
-      joined: '2013-11-02',
-      name: 'John',
-      city: 'Melbourne',
-      orderTotal: 414.437,
-      orders: [{
-        id: 2,
-        product: 'Pants',
-        total: 314.437
-      }, {
-        id: 3,
-        product: 'Belt',
-        total: 100
-      }]
-    }, {
-      id: 3,
-      joined: '2007-10-19',
-      name: 'Jack',
-      city: 'Perth',
-      orderTotal: 199.211,
-      orders: [{
-        id: 4,
-        product: 'Hat',
-        total: 99.211
-      }, {
-        id: 3,
-        product: 'Belt',
-        total: 100
-      }]
-    }];
+    function init() {
+      $scope.customers = customersFactory.getCustomers();
+    }
+    init();
+
+    $scope.sort = function(propertyName) {
+      if ($scope.sortBy === propertyName) {
+        $scope.reverse = !$scope.reverse;
+        return;
+      }
+      $scope.sortBy = propertyName;
+    };
+
   }
 
   angular.module('customersApp').controller('CustomersController', CustomersController);
