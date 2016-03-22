@@ -1,11 +1,12 @@
 (function() {
-  CustomersController.$inject = ['$scope', '$route', 'customersService'];
+  CustomersController.$inject = ['$scope', '$route', 'customersService', 'appSettings'];
 
-  function CustomersController($scope, $route, customersService) {
+  function CustomersController($scope, $route, customersService, appSettings) {
 
     $scope.reverse = false;
     $scope.sortBy = 'name';
     $scope.customers = [];
+    $scope.appSettings = appSettings;
 
     function init() {
       $scope.customers = customersService.getCustomers();
