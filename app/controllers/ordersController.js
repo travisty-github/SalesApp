@@ -1,19 +1,25 @@
 (function() {
   // Inject manually for minification.
-  OrderController.$inject = ['$scope', '$routeParams', 'customersFactory'];
+  OrderController.$inject = ['$scope', '$routeParams', 'customersService'];
 
-  function OrderController($scope, $routeParams, customersFactory) {
+  function OrderController($scope, $routeParams, customersService) {
     var customerId = $routeParams.customerId;
     $scope.orders = null;
     customer = null;
 
     function init() {
-      customer = customersFactory.getCustomer(customerId);
+      customersService.getCustomer(customerId)
+      .success(function(customer) {
+        $scope.customer = customer;
+        $scope.orders = customer.orders;
+        $scope.name = customer.name;
+      })
+      .error(function(data) {
+        console.log('Failed to get customer: '+ data);
+      });
     }
     init();
 
-    $scope.orders = customer.orders;
-    $scope.name = customer.name;
 
   }
 

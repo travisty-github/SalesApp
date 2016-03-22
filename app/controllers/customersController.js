@@ -9,7 +9,13 @@
     $scope.appSettings = appSettings;
 
     function init() {
-      $scope.customers = customersService.getCustomers();
+      customersService.getCustomers()
+        .success(function(customers) {
+          $scope.customers = customers;
+        })
+        .error(function(data) {
+          console.log('Error getting customers: ' + data);
+        });
     }
     init();
 
