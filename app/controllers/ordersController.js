@@ -1,8 +1,8 @@
 (function() {
   // Inject manually for minification.
-  OrderController.$inject = ['$scope', '$routeParams', 'customersService'];
+  OrderController.$inject = ['$scope', '$routeParams', 'customersService', '$log'];
 
-  function OrderController($scope, $routeParams, customersService) {
+  function OrderController($scope, $routeParams, customersService, $log) {
     var customerId = $routeParams.customerId;
     $scope.orders = null;
     customer = null;
@@ -14,8 +14,9 @@
         $scope.orders = customer.orders;
         $scope.name = customer.name;
       })
-      .error(function(data) {
-        console.log('Failed to get customer: '+ data);
+      .error(function(data, status, headers, config) {
+        $log.log('');
+        console.log('Failed to get customer: '+ data.error + ' ' + status);
       });
     }
     init();
