@@ -1,0 +1,21 @@
+<h2>All Orders</h2>
+<table>
+  <tr>
+    <th>
+      Product
+    </th>
+    <th>
+      Total
+    </th>
+  </tr>
+  <tr ng-repeat="order in allOrders">
+    <td>
+      {{ order.product }}
+    </td>
+    <td>
+      {{ order.total }}
+    </td>
+  </tr>
+
+  </tr>
+</table>
