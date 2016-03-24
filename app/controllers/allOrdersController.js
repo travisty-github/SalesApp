@@ -5,7 +5,7 @@
   function AllOrdersController($scope, customersService, $log) {
     var allOrders = [];
     $scope.allOrdersTotal = 0;
-    $scope.totalClass = 'danger';
+    $scope.totalClass = '';
 
     var customers = customersService.getCustomers()
       .then(function(response) {

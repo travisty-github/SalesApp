@@ -28,12 +28,22 @@
     };
 
     $scope.deleteCustomer = function(id) {
-      for (var i = 0; i < $scope.customers.length; i++) {
-        if ($scope.customers[i].id === id) {
-          $scope.customers.splice(i, 1);
-          break;
+
+      // Request server deletes customer
+      customersService.deleteCustomer(id).then(
+        function(response) {
+          // Remove customer from received customer list.
+          for (var i = 0; i < $scope.customers.length; i++) {
+            if ($scope.customers[i].id === id) {
+              $scope.customers.splice(i, 1);
+              break;
+            }
+          }
+        },
+        function(response) {
+          console.log('Failed to delete customer: ' + response.status + ' ' + response.data);
         }
-      }
+      );
     };
 
   }
