@@ -16,6 +16,12 @@
       {{ order.total | currency }}
     </td>
   </tr>
-
+  <tr ng-class="totalClass">
+    <td>
+      &nbsp;
+    </td>
+    <td>
+      {{ allOrdersTotal | currency }}
+    </td>
   </tr>
 </table>
