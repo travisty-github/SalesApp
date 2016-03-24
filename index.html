@@ -9,16 +9,21 @@
 
 <body ng-app="customersApp">
 
-  <ul>
-    <li>
-      <a href="/#/">Customers</a>
-    </li>
-    <li>
-      <a href="/#/orders">Orders</a>
-    </li>
-  </ul>
+  <nav class="navbar navbar-default" role="navigation">
+    <ul class="nav navbar-nav">
+      <li class="navbar-brand">
+        AngularJS
+      </li>
+      <li>
+        <a href="/#/">Customers</a>
+      </li>
+      <li>
+        <a href="/#/orders">Orders</a>
+      </li>
+    </ul>
+  </nav>
 
-  <div ng-view>
+  <div ng-view class="container">
 
   </div>
 
