@@ -27,6 +27,15 @@
       $scope.sortBy = propertyName;
     };
 
+    $scope.deleteCustomer = function(id) {
+      for (var i = 0; i < $scope.customers.length; i++) {
+        if ($scope.customers[i].id === id) {
+          $scope.customers.splice(i, 1);
+          break;
+        }
+      }
+    };
+
   }
 
   angular.module('customersApp').controller('CustomersController', CustomersController);
