@@ -21,7 +21,7 @@
       &nbsp;
     </th>
   </tr>
-  <tr ng-repeat="customer in customers | orderBy : sortBy : reverse | filter : {name: filterText}">
+  <tr ng-repeat="customer in customers | orderBy : sortBy : reverse | filter : {name: filterText}" class="repeat-animation">
     <td>
       {{ customer.joined | date: "dd/MM/yyyy" }}
     </td>
