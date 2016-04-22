@@ -1,4 +1,5 @@
 <h2>All Orders</h2>
+<h5>Filter order: <input type="text" ng-model="filterText" /></h5>
 <table class="table" ng-cloak>
   <tr>
     <th>
@@ -8,7 +9,7 @@
       Total
     </th>
   </tr>
-  <tr ng-repeat="order in allOrders" class="repeat-animation">
+  <tr ng-repeat="order in allOrders | filter : filterText" class="repeat-animation">
     <td>
       {{ order.product }}
     </td>
