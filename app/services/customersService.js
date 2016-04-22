@@ -13,6 +13,10 @@
       return $http.delete('http://localhost:3000/api/customers/' + customerId);
     };
 
+    this.createCustomer = function(name, city) {
+      return $http.post('http://localhost:3000/api/customers/', {name: name, city: city});
+    };
+
   };
 
   customersService.$inject = ['$http'];

@@ -14,6 +14,10 @@
         controller: 'AllOrdersController',
         templateUrl: 'app/views/allorders.html'
       })
+      .when('/addcustomer', {
+        controller: 'AddCustomerController',
+        templateUrl: 'app/views/addcustomer.html'
+      })
       .otherwise({ redirectTo: '/'});
 
   });
