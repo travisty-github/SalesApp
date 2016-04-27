@@ -23,10 +23,13 @@
 
                             // Function to reduce array of orders to a total price
                             var totalCost = function(prev, curr) {
-                                var cost = products.find(function(product) {
+                                var product = products.find(function(product) {
                                     return product.id === curr.id;
-                                }).cost;
-                                return prev + cost * curr.quantity;
+                                });
+                                if (product) {
+                                  return prev + product.cost * curr.quantity;
+                                }
+                                return prev + 0;
                             };
 
                             // Iterate through each customer and calculate
