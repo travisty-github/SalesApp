@@ -1,14 +1,15 @@
 (function() {
 
-  AddOrdersController.$inject = ['$scope', '$routeParams', 'productsService', 'customersService', '$log'];
+  AddOrdersController.$inject = ['$scope', '$routeParams', 'productsService', 'customersService', '$location', '$log'];
 
-  function AddOrdersController($scope, $routeParams, productsService, customersService, $log) {
+  function AddOrdersController($scope, $routeParams, productsService, customersService, $location, $log) {
 
       // Get customer details
       var customerOrders = [];
       customersService.getCustomer($routeParams.customerId)
         .success(function(customer) {
           $scope.customerName = customer.name;
+          $scope.customerId = customer.id;
           customerOrders = customer.orders;
         });
 
@@ -29,6 +30,7 @@
           });
 
           $scope.products = products;
+
         });
 
         // Highlight each modified row
@@ -39,6 +41,48 @@
             } else {
               product.rowClass = '';
             }
+          });
+        };
+
+        // Cancel all changes and return to main page
+        $scope.cancelChanges = function() {
+          $location.path('/');
+        };
+
+        // Reset all changes
+        $scope.undoChanges = function() {
+          $scope.products.forEach(function(product) {
+            product.orderQuantity = product.originalOrderQuantity;
+            // Remove all highlighting.
+            product.rowClass = '';
+          });
+
+        };
+
+        function mapProductsForUpdate() {
+            return $scope.products.filter(function(product) {
+              return (product.orderQuantity > 0);
+            }).map(function(product) {
+              // Only return product id and quantity.
+              return {
+                id: product.id,
+                quantity: product.orderQuantity
+              };
+            });
+        }
+
+        // Save changes
+        $scope.saveChanges = function() {
+          customersService.updateCustomerOrders($scope.customerId, mapProductsForUpdate()
+          )
+          .success(function() {
+            // Set originalOrderQuantity to current quantity and remove row
+            // highlighting
+            $scope.products = $scope.products.map(function(product) {
+              product.originalOrderQuantity = product.orderQuantity;
+              product.rowClass = '';
+              return product;
+            });
           });
         };
   }
