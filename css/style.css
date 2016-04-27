@@ -5,3 +5,7 @@
 .sortable {
   cursor: pointer;
 }
+
+.salesTarget {
+  text-align: right;
+}

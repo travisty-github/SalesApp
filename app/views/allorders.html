@@ -1,44 +1,64 @@
-<h2>All Orders</h2>
-<form class="form-inline">
-  <div class="form-group">
-    <label for="namefilter">Filter products:</label>
-    <input type="text" ng-model="filterText" class="form-control" id="namefilter" />
-    </h5>
-  </div>
-</form>
-<br />
-<table class="table" ng-cloak>
-  <tr>
-    <th>
-      Product
-    </th>
-    <th>
-      Quantity
-    </th>
-    <th>
-      Total
-    </th>
-  </tr>
-  <tr ng-repeat="order in allOrders | filter : filterText" class="repeat-animation">
-    <td>
-      {{ order.name}}
-    </td>
-    <td>
-      {{ order.quantity }}
-    </td>
-    <td>
-      {{ order.unitCost * order.quantity | currency }}
-    </td>
-  </tr>
-  <tr ng-class="totalClass">
-    <td>
-      <b>Total</b>
-    </td>
-    <td>
-      &nbsp;
-    </td>
-    <td>
-      {{ allOrdersTotal | currency }}
-    </td>
-  </tr>
-</table>
+<div class="container">
+  <h2>All Orders</h2>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="namefilter">Filter products:</label>
+      <input type="text" ng-model="filterText" class="form-control" id="namefilter" />
+      </h5>
+    </div>
+  </form>
+  <br />
+  <table class="table" ng-cloak>
+    <tr>
+      <th>
+        Product
+      </th>
+      <th>
+        Quantity
+      </th>
+      <th>
+        Total
+      </th>
+    </tr>
+    <tr ng-repeat="order in allOrders | filter : filterText" class="repeat-animation">
+      <td>
+        {{ order.name}}
+      </td>
+      <td>
+        {{ order.quantity }}
+      </td>
+      <td>
+        {{ order.unitCost * order.quantity | currency }}
+      </td>
+    </tr>
+    <tr ng-class="totalClass">
+      <td>
+        <b>Total</b>
+      </td>
+      <td>
+        &nbsp;
+      </td>
+      <td>
+        {{ allOrdersTotal | currency }}
+      </td>
+    </tr>
+  </table>
+  <form>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Sales Target</h4>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number" min="0" id="salesTarget" ng-model="salesTarget"
+            placeholder="Target" class="form-control salesTarget" ng-change="updateSalesTarget()" />
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

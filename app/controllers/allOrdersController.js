@@ -11,6 +11,7 @@
     var allOrders = [];
     $scope.allOrdersTotal = 0;
     $scope.totalClass = '';
+    $scope.salesTarget = 1000;
 
     // Retrieve all customers from the backend.
     var customers = customersService.getCustomers()
@@ -52,7 +53,7 @@
           }, 0);
 
           // Update the class for the total row based on target threshold.
-          $scope.totalClass = ($scope.allOrdersTotal > 300) ? 'success' : 'danger';
+          $scope.totalClass = ($scope.allOrdersTotal >= $scope.salesTarget) ? 'success' : 'danger';
         };
 
         // Populate order details with information about products from backend.
@@ -70,6 +71,10 @@
       }, function(response) {
         $log.log('[allOrdersController] Error getting customers: ' + response.status + ' ' + statusText);
       });
+
+      $scope.updateSalesTarget = function() {
+          $scope.totalClass = ($scope.allOrdersTotal >= $scope.salesTarget) ? 'success' : 'danger';
+      };
   }
 
   angular.module('customersApp').controller('AllOrdersController', AllOrdersController);
