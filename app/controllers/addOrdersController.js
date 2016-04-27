@@ -1,3 +1,5 @@
+/* Modifies orders for customers */
+
 (function() {
 
   AddOrdersController.$inject = ['$scope', '$routeParams', 'productsService', 'customersService', '$location', '$log'];
@@ -59,6 +61,7 @@
 
     };
 
+    // Maps the scope objects to strip all extraneous fields.
     function mapProductsForUpdate() {
       return $scope.products.filter(function(product) {
         return (product.orderQuantity > 0);
@@ -71,7 +74,7 @@
       });
     }
 
-    // Save changes
+    // Save changes to backend.
     $scope.saveChanges = function() {
       customersService.updateCustomerOrders($scope.customerId, mapProductsForUpdate())
         .success(function() {
