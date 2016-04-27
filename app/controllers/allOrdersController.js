@@ -1,12 +1,18 @@
+/* Displays all orders for all customers. Additionally highlights the total
+   row to show whether a subjective target has been met. TODO Add abitility to
+   display and modify this target. */
+
 (function() {
 
   AllOrdersController.$inject = ['$scope', 'customersService', 'productsService', '$log'];
 
   function AllOrdersController($scope, customersService, productsService, $log) {
+    // Initialise variables.
     var allOrders = [];
     $scope.allOrdersTotal = 0;
     $scope.totalClass = '';
 
+    // Retrieve all customers from the backend.
     var customers = customersService.getCustomers()
       .then(function(response) {
         var customers = response.data;
@@ -49,7 +55,7 @@
           $scope.totalClass = ($scope.allOrdersTotal > 300) ? 'success' : 'danger';
         };
 
-        // Populate order details.
+        // Populate order details with information about products from backend.
         normalisedOrderQuantitiesArray.forEach(function(order) {
           productsService.getProduct(order.id)
             .success(function(product) {
@@ -60,9 +66,6 @@
         });
 
         $scope.allOrders = normalisedOrderQuantitiesArray;
-
-
-
 
       }, function(response) {
         $log.log('[allOrdersController] Error getting customers: ' + response.status + ' ' + statusText);
