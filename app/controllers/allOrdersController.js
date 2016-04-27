@@ -12,7 +12,11 @@
         var customers = response.data;
         customers.forEach(function(customer) {
           customer.orders.forEach(function(order) {
-            allOrders.push(order);
+            // Only add orders that have an id. A customer with no orders
+            // shows up as an empty object.
+            if (order.id) {
+              allOrders.push(order);
+            }
           });
         });
 
