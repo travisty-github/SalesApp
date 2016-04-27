@@ -5,7 +5,7 @@
       return $http.get('http://localhost:3000/api/products');
     };
 
-    var products = {};
+
     // TODO Cache all proucts locally to prevent lots of requests.
     this.getProduct = function(id) {
       return $http.get('http://localhost:3000/api/products/' + id);
