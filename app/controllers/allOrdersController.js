@@ -1,6 +1,5 @@
 /* Displays all orders for all customers. Additionally highlights the total
-   row to show whether a subjective target has been met. TODO Add abitility to
-   display and modify this target. */
+   row to show whether a subjective target has been met. */
 
 (function() {
 
