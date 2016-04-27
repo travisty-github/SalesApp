@@ -1,6 +1,6 @@
 <h2>Add Orders</h2>
 <h4>{{ customerName }}</h4>
-<table ng-cloak class="table">
+<table ng-cloak class="table table-striped">
 
     <ul>
         <tr>
@@ -8,12 +8,21 @@
                 Item
             </th>
             <th>
+                Order Quantity
+            </th>
+            <th>
                 Price
             </th>
         </tr>
-        <tr ng-repeat="product in products" class="repeat-animation">
+        <tr ng-repeat="product in products | orderBy : 'name'" class="repeat-animation" ng-class="product.rowClass">
             <td>
                 {{ product.name }}
+            </td>
+            <td>
+                <div class="col-xs-3">
+                    <input type="number" min="0" class="form-control" ng-model="product.orderQuantity"
+                    ng-change="highlightModifiedRows()" />
+                </div>
             </td>
             <td>
                 {{ product.cost | currency}}

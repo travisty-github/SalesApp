@@ -17,6 +17,10 @@
       return $http.post('http://localhost:3000/api/customers/', {name: name, city: city});
     };
 
+    this.updateCustomerOrders = function(customerId, orders) {
+      return $http.put('http://localhost:3000/api/customers/' + customerId + '/orders', orders);
+    };
+
   };
 
   customersService.$inject = ['$http'];
