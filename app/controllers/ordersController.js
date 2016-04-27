@@ -1,3 +1,4 @@
+/* Displays all the orders for a single customer */
 (function() {
   // Inject manually for minification.
   OrderController.$inject = ['$scope', '$routeParams', 'customersService', 'productsService', '$log'];
@@ -8,12 +9,14 @@
     customer = null;
 
     function init() {
+      // Retrieve all customers from backend.
       customersService.getCustomer(customerId)
         .success(function(customer) {
           $scope.customer = customer;
           $scope.orders = customer.orders;
           $scope.name = customer.name;
 
+          // Calculate the total for each order (price * quantity)
           $scope.customer.orders.forEach(function(order) {
             if (order.id) {
               productsService.getProduct(order.id)
@@ -30,8 +33,8 @@
           console.log('Failed to get customer: ' + data.error + ' ' + status);
         });
     }
+    
     init();
-
 
   }
 
