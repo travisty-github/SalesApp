@@ -4,14 +4,13 @@
 
     // Get all products
     this.getProducts = function() {
-      return $http.get(appSettings.backend + '/api/products');
+      return $http.get(appSettings.backend + '/api/products', {cache: true});
     };
 
 
     // Get a specific product.
-    // TODO Cache all proucts locally to prevent lots of requests.
     this.getProduct = function(id) {
-      return $http.get(appSettings.backend + '/api/products/' + id);
+      return $http.get(appSettings.backend + '/api/products/' + id, {cache: true});
     };
 
   };
