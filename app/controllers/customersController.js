@@ -1,53 +1,78 @@
 (function() {
-  CustomersController.$inject = ['$scope', '$route', 'customersService', 'appSettings'];
+    'use strict';
+    CustomersController.$inject = ['$scope', '$route', 'customersService', 'productsService', 'appSettings'];
 
-  function CustomersController($scope, $route, customersService, appSettings) {
+    function CustomersController($scope, $route, customersService, productsService, appSettings) {
 
-    $scope.reverse = false;
-    $scope.sortBy = 'name';
-    $scope.customers = [];
-    $scope.appSettings = appSettings;
+        $scope.reverse = false;
+        $scope.sortBy = 'name';
+        $scope.customers = [];
+        $scope.appSettings = appSettings;
 
-    function init() {
-      customersService.getCustomers()
-        .success(function(customers) {
-          $scope.customers = customers;
-        })
-        .error(function(data) {
-          console.log('Error getting customers: ' + data);
-        });
-    }
-    init();
+        function init() {
 
-    $scope.sort = function(propertyName) {
-      if ($scope.sortBy === propertyName) {
-        $scope.reverse = !$scope.reverse;
-        return;
-      }
-      $scope.sortBy = propertyName;
-    };
+            // Get all customers
+            customersService.getCustomers()
+                .success(function(customers) {
+                    $scope.customers = customers;
 
-    $scope.deleteCustomer = function(id) {
+                    // Determine order totals. Need to pull list of products
+                    // to get prices.
+                    productsService.getProducts()
+                        .success(function(products) {
 
-      // Request server deletes customer
-      customersService.deleteCustomer(id).then(
-        function(response) {
-          // Remove customer from received customer list.
-          for (var i = 0; i < $scope.customers.length; i++) {
-            if ($scope.customers[i].id === id) {
-              $scope.customers.splice(i, 1);
-              break;
-            }
-          }
-        },
-        function(response) {
-          console.log('Failed to delete customer: ' + response.status + ' ' + response.data);
+                            // Function to reduce array of orders to a total price
+                            var totalCost = function(prev, curr) {
+                                var cost = products.find(function(product) {
+                                    return product.id === curr.id;
+                                }).cost;
+                                return prev + cost * curr.quantity;
+                            };
+
+                            // Iterate through each customer and calculate
+                            // their total order price.
+                            for (var i = 0; i < customers.length; i++) {
+                                $scope.customers[i].orderTotal = customers[i].orders.reduce(totalCost, 0);
+                            }
+
+                        });
+                })
+                .error(function(data) {
+                    console.log('Error getting customers: ' + data);
+                });
         }
-      );
-    };
+        init();
 
-  }
+        $scope.sort = function(propertyName) {
+            if ($scope.sortBy === propertyName) {
+                $scope.reverse = !$scope.reverse;
+                return;
+            }
+            $scope.sortBy = propertyName;
+        };
 
-  angular.module('customersApp').controller('CustomersController', CustomersController);
+        $scope.deleteCustomer = function(id) {
+
+            // Request server deletes customer
+            customersService.deleteCustomer(id).then(
+                function(response) {
+                    // Remove customer from received customer list.
+                    for (var i = 0; i < $scope.customers.length; i++) {
+                        if ($scope.customers[i].id === id) {
+                            $scope.customers.splice(i, 1);
+                            break;
+                        }
+                    }
+                },
+                function(response) {
+                    console.log('Failed to delete customer: ' + response.status + ' ' + response.data);
+                }
+            );
+        };
+
+
+    }
+
+    angular.module('customersApp').controller('CustomersController', CustomersController);
 
 }());

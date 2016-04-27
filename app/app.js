@@ -14,6 +14,10 @@
         controller: 'AllOrdersController',
         templateUrl: 'app/views/allorders.html'
       })
+      .when('/orders/:customerId/add', {
+        controller: 'AddOrdersController',
+        templateUrl: 'app/views/addorders.html'
+      })
       .when('/addcustomer', {
         controller: 'AddCustomerController',
         templateUrl: 'app/views/addcustomer.html'

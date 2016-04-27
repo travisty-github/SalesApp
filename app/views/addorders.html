@@ -1,0 +1,24 @@
+<h2>Add Orders</h2>
+<h4>{{ customerName }}</h4>
+<table ng-cloak class="table">
+
+    <ul>
+        <tr>
+            <th>
+                Item
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+        <tr ng-repeat="product in products" class="repeat-animation">
+            <td>
+                {{ product.name }}
+            </td>
+            <td>
+                {{ product.cost | currency}}
+            </td>
+        </tr>
+    </ul>
+
+</table>

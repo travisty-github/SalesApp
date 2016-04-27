@@ -20,6 +20,9 @@
     <th>
       &nbsp;
     </th>
+    <th>
+      &nbsp;
+    </th>
   </tr>
   <tr ng-repeat="customer in customers | orderBy : sortBy : reverse | filter : {name: filterText}" class="repeat-animation">
     <td>
@@ -36,6 +39,9 @@
     </td>
     <td>
       <a href="#/orders/{{ customer.id }}">View Orders</a>
+    </td>
+    <td>
+      <a href="#/orders/{{ customer.id }}/add">Add Orders</a>
     </td>
     <td>
       <span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(customer.id)"></span>

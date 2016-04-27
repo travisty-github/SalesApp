@@ -5,12 +5,24 @@
       Product
     </th>
     <th>
+      Quantity
+    </th>
+    <th>
+      Unit Price
+    </th>
+    <th>
       Total
     </th>
   </tr>
   <tr ng-repeat="order in orders" ng-cloak>
     <td>
       {{ order.product }}
+    </td>
+    <td>
+      {{ order.quantity }}
+    </td>
+    <td>
+      {{ order.unitPrice | currency }}
     </td>
     <td>
       {{ order.total | currency }}
