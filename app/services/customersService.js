@@ -14,12 +14,20 @@
     };
 
     this.createCustomer = function(name, city) {
-      return $http.post('http://localhost:3000/api/customers/', {name: name, city: city});
+      return $http.post('http://localhost:3000/api/customers/', {
+        name: name,
+        city: city
+      });
     };
 
     // Update customer orders
     this.updateCustomerOrders = function(customerId, orders) {
       return $http.put('http://localhost:3000/api/customers/' + customerId + '/orders', orders);
+    };
+
+    // Reset customers
+    this.resetCustomers = function() {
+      return $http.delete('http://localhost:3000/api/customers');
     };
 
   };

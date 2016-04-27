@@ -70,7 +70,15 @@
             );
         };
 
-
+        $scope.resetCustomers = function() {
+          customersService.resetCustomers()
+            .success(function() {
+              customersService.getCustomers()
+                .success(function(customers) {
+                  $scope.customers = customers;
+                });
+            });
+        };
     }
 
     angular.module('customersApp').controller('CustomersController', CustomersController);
