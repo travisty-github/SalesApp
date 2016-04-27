@@ -1,26 +1,26 @@
 /* Interacts with backend to provide customer data interaction. */
 
 (function() {
-  var customersService = function($http) {
+  var customersService = function($http, appSettings) {
 
     // Get all customers
     this.getCustomers = function() {
-      return $http.get('http://localhost:3000/api/customers');
+      return $http.get(appSettings.backend + '/api/customers');
     };
 
     // Get a specific customer
     this.getCustomer = function(customerId) {
-      return $http.get('http://localhost:3000/api/customers/' + customerId);
+      return $http.get(appSettings.backend + '/api/customers/' + customerId);
     };
 
     // Delete a specific customer
     this.deleteCustomer = function(customerId) {
-      return $http.delete('http://localhost:3000/api/customers/' + customerId);
+      return $http.delete(appSettings.backend + '/api/customers/' + customerId);
     };
 
     // Create a new customer
     this.createCustomer = function(name, city) {
-      return $http.post('http://localhost:3000/api/customers/', {
+      return $http.post(appSettings.backend + '/api/customers/', {
         name: name,
         city: city
       });
@@ -28,17 +28,17 @@
 
     // Update customer orders
     this.updateCustomerOrders = function(customerId, orders) {
-      return $http.put('http://localhost:3000/api/customers/' + customerId + '/orders', orders);
+      return $http.put(appSettings.backend + '/api/customers/' + customerId + '/orders', orders);
     };
 
     // Reset customers
     this.resetCustomers = function() {
-      return $http.delete('http://localhost:3000/api/customers');
+      return $http.delete(appSettings.backend + '/api/customers');
     };
 
   };
 
-  customersService.$inject = ['$http'];
+  customersService.$inject = ['$http', 'appSettings'];
 
   angular.module('customersApp').service('customersService', customersService);
 
