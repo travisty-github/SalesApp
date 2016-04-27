@@ -1,52 +1,58 @@
 <h2>{{ appSettings.title }}</h2>
-<h5>Customer name filter: <input type="text" ng-model="filterText" /></h5>
-<table ng-cloak class="table">
-  <tr>
-    <th ng-click="sort('joined')">
-      Joined
-    </th>
-    <th ng-click="sort('name')">
-      Name
-    </th>
-    <th ng-click="sort('city')">
-      City
-    </th>
-    <th ng-click="sort('orderTotal')">
-      Order Total
-    </th>
-    <th>
-      &nbsp;
-    </th>
-    <th>
-      &nbsp;
-    </th>
-    <th>
-      &nbsp;
-    </th>
-  </tr>
-  <tr ng-repeat="customer in customers | orderBy : sortBy : reverse | filter : {name: filterText}" class="repeat-animation">
-    <td>
-      {{ customer.joined | date: "dd/MM/yyyy" }}
-    </td>
-    <td>
-      {{ customer.name}}
-    </td>
-    <td>
-      {{ customer.city}}
-    </td>
-    <td>
-      {{ customer.orderTotal | currency }}
-    </td>
-    <td>
-      <a href="#/orders/{{ customer.id }}">View Orders</a>
-    </td>
-    <td>
-      <a href="#/orders/{{ customer.id }}/add">Modify Orders</a>
-    </td>
-    <td>
-      <span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(customer.id)"></span>
-    </td>
-  </tr>
-</table>
+<form class="form-inline">
+    <div class="form-group">
+        <label for="namefilter">Customer name filter</label>
+        <input type="text" ng-model="filterText" class="form-control" id="namefilter" />
+        </h5>
+    </div>
+</form>
 <br />
+<table ng-cloak class="table">
+    <tr>
+        <th ng-click="sort('joined')">
+            Joined
+        </th>
+        <th ng-click="sort('name')">
+            Name
+        </th>
+        <th ng-click="sort('city')">
+            City
+        </th>
+        <th ng-click="sort('orderTotal')">
+            Order Total
+        </th>
+        <th>
+            &nbsp;
+        </th>
+        <th>
+            &nbsp;
+        </th>
+        <th>
+            &nbsp;
+        </th>
+    </tr>
+    <tr ng-repeat="customer in customers | orderBy : sortBy : reverse | filter : {name: filterText}" class="repeat-animation">
+        <td>
+            {{ customer.joined | date: "dd/MM/yyyy" }}
+        </td>
+        <td>
+            {{ customer.name}}
+        </td>
+        <td>
+            {{ customer.city}}
+        </td>
+        <td>
+            {{ customer.orderTotal | currency }}
+        </td>
+        <td>
+            <a href="#/orders/{{ customer.id }}">View Orders</a>
+        </td>
+        <td>
+            <a href="#/orders/{{ customer.id }}/add">Modify Orders</a>
+        </td>
+        <td>
+            <span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(customer.id)"></span>
+        </td>
+    </tr>
+</table>
 <span>Total customers: {{ customers.length }}</span>

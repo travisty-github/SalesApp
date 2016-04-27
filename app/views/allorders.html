@@ -1,5 +1,12 @@
 <h2>All Orders</h2>
-<h5>Filter order: <input type="text" ng-model="filterText" /></h5>
+<form class="form-inline">
+    <div class="form-group">
+        <label for="namefilter">Filter products:</label>
+        <input type="text" ng-model="filterText" class="form-control" id="namefilter" />
+        </h5>
+    </div>
+</form>
+<br />
 <table class="table" ng-cloak>
   <tr>
     <th>
