@@ -11,13 +11,13 @@
       console.log('creating');
       // POST new customer
       customersService.createCustomer($scope.name, $scope.city)
-      .then(function(response) {
-        if(response.status === 200) {
-          $window.location.href = '/';
-        }
+        .then(function(response) {
+          if (response.status === 200) {
+            $window.location.href = '/';
+          }
 
 
-      });
+        });
 
     };
   }

@@ -41,8 +41,8 @@
             return total + parseInt(current.unitCost) * current.quantity;
           }, 0);
 
-        // Update the class for the total row based on target threshold.
-        $scope.totalClass = ($scope.allOrdersTotal > 300) ? 'success' : 'danger';
+          // Update the class for the total row based on target threshold.
+          $scope.totalClass = ($scope.allOrdersTotal > 300) ? 'success' : 'danger';
         };
 
         // Populate order details.
