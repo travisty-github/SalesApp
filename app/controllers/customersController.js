@@ -1,9 +1,12 @@
+/* Shows all customers, order totals and actions to modify the customers. */
+
 (function() {
   'use strict';
   CustomersController.$inject = ['$scope', '$route', 'customersService', 'productsService', 'appSettings'];
 
   function CustomersController($scope, $route, customersService, productsService, appSettings) {
 
+    // Initialise variables.
     $scope.reverse = false;
     $scope.sortBy = 'name';
     $scope.customers = [];
@@ -16,7 +19,7 @@
         .success(function(customers) {
           $scope.customers = customers;
 
-          // Determine order totals. Need to pull list of products
+          // Determine order totals. Need to pull list of products from backend
           // to get prices.
           productsService.getProducts()
             .success(function(products) {
@@ -46,6 +49,7 @@
     }
     init();
 
+    // Sorts the customers based on which title is clicked.
     $scope.sort = function(propertyName) {
       if ($scope.sortBy === propertyName) {
         $scope.reverse = !$scope.reverse;
@@ -54,8 +58,8 @@
       $scope.sortBy = propertyName;
     };
 
+    // Deletes a customer from the backend.
     $scope.deleteCustomer = function(id) {
-
       // Request server deletes customer
       customersService.deleteCustomer(id).then(
         function(response) {
@@ -73,6 +77,8 @@
       );
     };
 
+    // Insructs the backend to reset all changes to the customers.
+    // Re-fetches the reset data.
     $scope.resetCustomers = function() {
       customersService.resetCustomers()
         .success(function() {
