@@ -15,12 +15,14 @@
           $scope.name = customer.name;
 
           $scope.customer.orders.forEach(function(order) {
-            productsService.getProduct(order.id)
-              .success(function(product) {
-                order.unitPrice = product.cost;
-                order.product = product.name;
-                order.total = order.unitPrice * order.quantity;
-              });
+            if (order.id) {
+              productsService.getProduct(order.id)
+                .success(function(product) {
+                  order.unitPrice = product.cost;
+                  order.product = product.name;
+                  order.total = order.unitPrice * order.quantity;
+                });
+            }
           });
         })
         .error(function(data, status, headers, config) {
