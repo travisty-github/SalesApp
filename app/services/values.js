@@ -1,4 +1,4 @@
 angular.module('customersApp').value('appSettings', {
-  title: "Awesome Customers",
+  title: "SalesApp Customers",
   writtenBy: "Travis"
 });
