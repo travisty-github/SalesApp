@@ -21,7 +21,7 @@
           calculateTotals();
         })
         .error(function(data) {
-          console.log('Error getting customers: ' + data);
+          $log.error('Error getting customers: ' + data);
         });
     }
 
@@ -77,7 +77,7 @@
           }
         },
         function(response) {
-          console.log('Failed to delete customer: ' + response.status + ' ' + response.data);
+          $log.error('Failed to delete customer: ' + response.status + ' ' + response.data);
         }
       );
     };

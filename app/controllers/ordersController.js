@@ -29,11 +29,10 @@
           });
         })
         .error(function(data, status, headers, config) {
-          $log.log('');
-          console.log('Failed to get customer: ' + data.error + ' ' + status);
+          $log.error('Failed to get customer: ' + status);
         });
     }
-    
+
     init();
 
   }
